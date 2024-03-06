@@ -6,36 +6,43 @@ for i in {1..1440}; do
     vmstat -n 1 1 | awk 'NR>2 {print $4, $5, $6}' >> vmstat.txt
     sleep 5
 done
+
+
 python3 - <<EOF
-import csv
+import pandas as pd
 
 
-# Abre el archivo de entrada en modo de lectura
-with open('vmstat.txt', 'r') as infile:
-    # Lee las líneas del archivo
-    lines = infile.readlines()
+def main():
+    Memtotal = 10946740
+    timestamp = []
+    mem = []
+    memused = []
+    mempercent = []
+    with open('vmstat.txt', 'r') as fichero:
+        for linea in fichero:
+            timestamp.append(linea[:19])  # Los primeros 19 caracteres son para el timestamp
+            free_memory = int(linea[20:28])  # Los siguientes 8 caracteres son para la memoria libre
+            mem.append(free_memory)
+            memused.append(Memtotal - free_memory)  # Calcula la memoria utilizada
+            mempercent.append(((Memtotal - free_memory) * 100) / Memtotal)  # Calcula el porcentaje de memoria utilizada
 
-# Procesa las líneas para eliminar comas en la columna de Timestamp
-processed_lines = [line.replace(',', '') for line in lines]
+ 
 
-# Abre un archivo CSV para escribir los datos
-with open('vmstat.csv', 'w', newline='') as outfile:
-    # Crea un escritor CSV con separador ;
-    writer = csv.writer(outfile, delimiter=';')
-    
-    # Escribe la cabecera del CSV
-    writer.writerow(['Timestamp', 'Capacidad disponible', 'Capacidad utilizada', '% Memoria utilizada'])
-    
-    # Itera sobre las líneas procesadas
-    for line in processed_lines:
-        # Divide la línea en columnas
-        columns = line.strip().split()
-        
-        # Escribe las columnas en el archivo CSV
-        writer.writerow(columns)
+    data = {
+        'Timestamp': timestamp,
+        'Capacidad disponible': mem,
+        'Capacidad utilizada': memused,  # Utiliza la memoria ajustada
+        '% Memoria utilizada': mempercent
+    }
 
-print("Archivo CSV creado exitosamente.")
+    df = pd.DataFrame(data, columns=['Timestamp', 'Capacidad disponible', 'Capacidad utilizada', '% Memoria utilizada'])
+
+    df.to_csv('monitorizacionMEM.csv', sep=';', index=False)
+
+
+if __name__ == '__main__':
+    main()
+
 
 
 EOF
-
