@@ -17,17 +17,10 @@ def main():
     memused = []
     mempercent = []
     with open('vtp.txt', 'r') as fichero:
-        # Eliminar comas y guardar el contenido en un nuevo archivo temporal
-        with open('vtp_temp.txt', 'w') as temp_file:
-            for linea in fichero:
-                linea_sin_comas = linea.replace(',', '')  # Elimina las comas
-                temp_file.write(linea_sin_comas)
-
-    # Continuar con la lectura del archivo temporal sin comas
-    with open('vtp_temp.txt', 'r') as fichero:
         for linea in fichero:
-            parts = linea.strip().split(' ')
-            timestamp.append(parts[0])  # Guarda el timestamp
+            parts = linea.strip().split(', ')
+            # Eliminar comas solo para la columna de timestamp
+            timestamp.append(parts[0].replace(',', ''))  # Guarda el timestamp sin comas
             free_memory = int(parts[1])  # Guarda la memoria libre
             mem.append(free_memory)
             memused.append(Memtotal - free_memory)  # Calcula la memoria utilizada
