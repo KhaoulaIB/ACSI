@@ -16,12 +16,10 @@ def main():
     mem = []
     memused = []
     mempercent = []
-    with open('vtp.txt', 'r') as fichero:
+    with open('vmstat.txt', 'r') as fichero:
         for linea in fichero:
-            parts = linea.strip().split(', ')
-            # Eliminar comas solo para la columna de timestamp
-            timestamp.append(parts[0].replace(',', ''))  # Guarda el timestamp sin comas
-            free_memory = int(parts[1])  # Guarda la memoria libre
+            timestamp.append(linea[:19])  # Los primeros 19 caracteres son para el timestamp
+            free_memory = int(linea[20:28])  # Los siguientes 8 caracteres son para la memoria libre
             mem.append(free_memory)
             memused.append(Memtotal - free_memory)  # Calcula la memoria utilizada
             mempercent.append(((Memtotal - free_memory) * 100) / Memtotal)  # Calcula el porcentaje de memoria utilizada
@@ -43,6 +41,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 EOF
