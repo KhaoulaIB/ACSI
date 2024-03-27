@@ -28,8 +28,8 @@ def main():
     df_memory = pd.DataFrame(memory_data)
 
     # Escribir los datos en archivos CSV
-    df_cpu.to_csv('90kcpu.csv', sep=';', index=False)
-    df_memory.to_csv('90kmem.csv', sep=';', index=False)
+    df_cpu.to_csv('200kcpu.csv', sep=';', index=False)
+    df_memory.to_csv('120kmem.csv', sep=';', index=False)
 
 if __name__ == '__main__':
     main()
