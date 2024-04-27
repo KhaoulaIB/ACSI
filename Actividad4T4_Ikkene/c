@@ -1,0 +1,39 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE PROCESAD,DISC,FONT;
+      2           REAL PROB1(2)=(5.,4.);
+      3 /STATION/ NAME=FONT;
+      4 			TYPE = SOURCE;
+      5           SERVICE=EXP(0.3333);
+      6           TRANSIT=PROCESAD,PROB1(1);
+      7 /STATION/ NAME=PROCESAD;
+      8 			SERVICE = EXP(0.02);
+      9           TRANSIT=DISC, PROB1(2), OUT,1;
+     10 /STATION/ NAME=DISC;
+     11           SERVICE=EXP(0.025); &doble de rapido
+     12 		  TRANSIT=PROCESAD;
+     13  
+     14 /CONTROL/ CLASS=ALL QUEUE;
+     15 /EXEC/
+     16           BEGIN
+     17             SOLVE;
+     18 	
+     19           END;
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.3000    *0.4286    *0.2857E-01* 15.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.3000    *0.4286    *0.3572E-01* 12.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.3333    * 1.000    * 1.000    *0.3333    * 3.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6708 WORDS OF 4 BYTES
+               (  0.13  % OF TOTAL MEMORY)
+     20 /END/

@@ -1,0 +1,53 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE PROCESAD,DISC,FONT;
+      2           REAL PROB1(2)=(5.,4.);
+      3 		  REAL SUM;
+      4  
+      5 /STATION/ NAME=FONT;
+      6 			TYPE = SOURCE;
+      7           SERVICE=EXP(0.3333);
+      8           TRANSIT=PROCESAD,PROB1(1);
+      9 /STATION/ NAME=PROCESAD;
+     10 			SERVICE = EXP(0.02);
+     11           TRANSIT=DISC, PROB1(2), OUT,1;
+     12 /STATION/ NAME=DISC;
+     13           SERVICE=EXP(0.05);
+     14 		  TRANSIT=PROCESAD;
+     15  
+     16  
+     17 /CONTROL/ CLASS=ALL QUEUE;
+     18 /EXEC/
+     19           BEGIN
+     20             SOLVE;
+     21 			PRINT("PRODUCTIVIDAD DEL PROCESADOR = ", MTHRUPUT(PROCESAD));
+     22 			PRINT("PRODUCTIVIDAD DEL DISCO = ", MTHRUPUT(DISC));
+     23 			PRINT("");
+     24 			PRINT("UTILIZACIÓN DEL PROCESADOR = ", MBUSYPCT(PROCESAD));
+     25 			PRINT("UTILIZACIÓN DEL DISCO = ", MBUSYPCT(DISC));
+     26 			PRINT("");
+     27           END;
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.3000    *0.4286    *0.2857E-01* 15.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.5000E-01*0.6001    * 1.500    *0.1250    * 12.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.3333    * 1.000    * 1.000    *0.3333    * 3.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6830 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ PRODUCTIVIDAD DEL PROCESADOR =    15.00    
+ PRODUCTIVIDAD DEL DISCO =    12.00    
+ 
+ UTILIZACIÓN DEL PROCESADOR =   0.3000    
+ UTILIZACIÓN DEL DISCO =   0.6001    
+ 
+     28 /END/

@@ -1,0 +1,53 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE PROCESAD,DISC,FONT;
+      2           REAL PROB1(2)=(5.,4.);
+      3  
+      4 /STATION/ NAME=FONT;
+      5 			TYPE = SOURCE;
+      6           SERVICE=EXP(0.3333);
+      7           TRANSIT=PROCESAD,PROB1(1);
+      8 /STATION/ NAME=PROCESAD;
+      9 			SERVICE = EXP(0.02);
+     10           TRANSIT=DISC, PROB1(2), OUT,1;
+     11 /STATION/ NAME=DISC;
+     12           SERVICE=EXP(0.05);
+     13 		  TRANSIT=PROCESAD;
+     14  
+     15  
+     16 /CONTROL/ CLASS=ALL QUEUE;
+     17 /EXEC/
+     18           BEGIN
+     19             PRINT;
+     20             SOLVE;
+     21 			PRINT("DEMANDA DE LOS DISPOSITIVOS");
+     22 			PRINT("");
+     23 			PRINT("DEMANDA DEL PROCESADOR = ", PROB1(1)*MSERVICE(PROCESAD));
+     24 			PRINT("");
+     25 			PRINT("DEMANDA DEL DISCO = ", PROB1(2)*MSERVICE(DISC));
+     26           END;
+ 
+1
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.3000    *0.4286    *0.2857E-01* 15.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.5000E-01*0.6001    * 1.500    *0.1250    * 12.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.3333    * 1.000    * 1.000    *0.3333    * 3.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6804 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ DEMANDA DE LOS DISPOSITIVOS
+ 
+ DEMANDA DEL PROCESADOR =   0.1000    
+ 
+ DEMANDA DEL DISCO =   0.2000    
+     27 /END/
