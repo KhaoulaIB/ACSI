@@ -1,0 +1,191 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE PROCESAD,DISC,FONT;
+      2           REAL PROB1(2)=(5.,4.);
+      3 		  REAL PETICION, SUM;
+      4 /STATION/ NAME=FONT;
+      5 			TYPE = SOURCE;
+      6           SERVICE=EXP(1/PETICION);
+      7           TRANSIT=PROCESAD,PROB1(1);
+      8 /STATION/ NAME=PROCESAD;
+      9 			SERVICE = EXP(0.02);
+     10           TRANSIT=DISC, PROB1(2), OUT,1;
+     11 /STATION/ NAME=DISC;
+     12           SERVICE=EXP(0.025); &doble de rapido
+     13 		  TRANSIT=PROCESAD;
+     14  
+     15 /CONTROL/ CLASS=ALL QUEUE;
+     16 /EXEC/
+     17 		FOR PETICION:=1 STEP 1 UNTIL 10 DO
+     18           BEGIN
+     19             SOLVE;
+     20 			SUM:= (PROB1(1)*MRESPONSE(PROCESAD))+(PROB1(2)*MRESPONSE(DISC));
+     21 			PRINT("NUMERO DE PETIICIONES = ", PETICION);
+     22 			PRINT("TIEMPO DE RESPUESTA R = ", SUM);
+     23  
+     24           END;
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.1000    *0.1111    *0.2222E-01* 5.000    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.1000    *0.1111    *0.2778E-01* 4.000    *
+ *          *          *          *          *          *          *
+ *FONT      * 1.000    * 1.000    * 1.000    * 1.000    * 1.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6840 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    1.000    
+ TIEMPO DE RESPUESTA R =   0.2222    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.2000    *0.2500    *0.2500E-01* 10.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.2000    *0.2500    *0.3125E-01* 8.000    *
+ *          *          *          *          *          *          *
+ *FONT      *0.5000    * 1.000    * 1.000    *0.5000    * 2.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6870 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    2.000    
+ TIEMPO DE RESPUESTA R =   0.2500    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.3000    *0.4286    *0.2857E-01* 15.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.3000    *0.4286    *0.3571E-01* 12.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.3333    * 1.000    * 1.000    *0.3333    * 3.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6900 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    3.000    
+ TIEMPO DE RESPUESTA R =   0.2857    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.4000    *0.6667    *0.3333E-01* 20.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.4000    *0.6667    *0.4167E-01* 16.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.2500    * 1.000    * 1.000    *0.2500    * 4.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6930 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    4.000    
+ TIEMPO DE RESPUESTA R =   0.3333    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.5000    * 1.000    *0.4000E-01* 25.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.5000    * 1.000    *0.5000E-01* 20.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.2000    * 1.000    * 1.000    *0.2000    * 5.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6960 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    5.000    
+ TIEMPO DE RESPUESTA R =   0.4000    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.6000    * 1.500    *0.5000E-01* 30.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.6000    * 1.500    *0.6250E-01* 24.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.1667    * 1.000    * 1.000    *0.1667    * 6.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6990 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    6.000    
+ TIEMPO DE RESPUESTA R =   0.5000    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.7000    * 2.333    *0.6667E-01* 35.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.7000    * 2.333    *0.8333E-01* 28.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.1429    * 1.000    * 1.000    *0.1429    * 7.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7020 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    7.000    
+ TIEMPO DE RESPUESTA R =   0.6667    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.8000    * 4.000    *0.1000    * 40.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.8000    * 4.000    *0.1250    * 32.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.1250    * 1.000    * 1.000    *0.1250    * 8.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7050 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    8.000    
+ TIEMPO DE RESPUESTA R =    1.000    
+ - CONVOLUTION METHOD ("CONVOL") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01*0.9000    * 9.000    *0.2000    * 45.00    *
+ *          *          *          *          *          *          *
+ *DISC      *0.2500E-01*0.9000    * 9.000    *0.2500    * 36.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.1111    * 1.000    * 1.000    *0.1111    * 9.000    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7080 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    9.000    
+ TIEMPO DE RESPUESTA R =    2.000    
+ - CONVOLUTION METHOD ("CONVOL") -
+ (030101)  ==>WARNING (SOLVE) : NETWORK NOT STABLE
+                                ... STATION : DISC  €?
+                                ... TOTAL TRAFFIC INTENSITY :  211.3
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *PROCESAD  *0.2000E-01* 1.000    *0.1678E+08*0.3355E+06* 50.00    *
+ *          *          *          *          *          *          *
+ *FONT      *0.1000    * 1.000    * 1.000    *0.1000    * 10.00    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7110 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE PETIICIONES =    10.00    
+ TIEMPO DE RESPUESTA R =   0.1678E+07
+     25 /END/

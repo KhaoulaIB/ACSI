@@ -1,0 +1,20 @@
+/DECLARE/ QUEUE PROCESAD,DISC,FONT;
+          REAL PROB1(2)=(5.,4.);
+/STATION/ NAME=FONT;
+			TYPE = SOURCE;
+          SERVICE=EXP(0.3333);
+          TRANSIT=PROCESAD,PROB1(1);
+/STATION/ NAME=PROCESAD;
+			SERVICE = EXP(0.02);
+          TRANSIT=DISC, PROB1(2), OUT,1;
+/STATION/ NAME=DISC;
+          SERVICE=EXP(0.025); &doble de rapido
+		  TRANSIT=PROCESAD;
+
+/CONTROL/ CLASS=ALL QUEUE;
+/EXEC/    
+          BEGIN
+            SOLVE;
+			
+          END;
+/END/
