@@ -1,0 +1,572 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE CPU,DISC,TERMINAL;
+      2           REAL PROB1=7.;
+      3           REAL R;
+      4           INTEGER I,N1;
+      5 /STATION/ NAME=CPU;
+      6 &         SCHED=PS;
+      7           SERVICE=EXP(0.03);
+      8           TRANSIT=DISC,PROB1,TERMINAL,1;
+      9 /STATION/ NAME=DISC;
+     10 		SERVICE= EXP(0.1);
+     11           TRANSIT=CPU;
+     12 /STATION/ NAME=TERMINAL;
+     13           TYPE=INFINITE;
+     14           INIT=N1;
+     15           SERVICE=EXP(8.);
+     16           TRANSIT=CPU;
+     17 /CONTROL/ CLASS=ALL QUEUE;
+     18 /EXEC/    FOR N1:=1 STEP 1 UNTIL 30 DO
+     19           BEGIN
+     20             SOLVE;
+     21 			PRINT("APARTADO D");
+     22 			PRINT("NUMERO DE USUARIOS=",N1);
+     23 			R:= (N1/MTHRUPUT(TERMINAL))-MSERVICE(TERMINAL);
+     24 			PRINT("TIEMPO DE RESPUESTA DEL SISTEMA (R)= ", R);
+     25 			PRINT("PRODUCTIVIDAD DEL SISTEMA (X0)= ", MTHRUPUT(TERMINAL));
+     26           END;
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2685E-01*0.2685E-01*0.3000E-01*0.8949    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.7830E-01*0.7830E-01*0.1000    *0.7830    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00*0.8949    * 8.000    *0.1119    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6862 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        1 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=   0.9400    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.1119    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.5333E-01*0.5476E-01*0.3081E-01* 1.778    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.1555    *0.1677    *0.1078    * 1.555    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 1.778    * 8.000    *0.2222    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6888 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        2 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.001    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.2222    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.7938E-01*0.8372E-01*0.3164E-01* 2.646    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.2315    *0.2703    *0.1168    * 2.315    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 2.646    * 8.000    *0.3307    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6914 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        3 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.071    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.3307    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.1049    *0.1137    *0.3251E-01* 3.498    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.3060    *0.3888    *0.1270    * 3.060    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 3.498    * 8.000    *0.4372    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6940 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        4 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.149    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.4372    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.1299    *0.1446    *0.3341E-01* 4.329    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.3788    *0.5261    *0.1389    * 3.788    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 4.329    * 8.000    *0.5412    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6966 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        5 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.239    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.5412    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.1541    *0.1764    *0.3434E-01* 5.138    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.4495    *0.6860    *0.1526    * 4.495    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 5.138    * 8.000    *0.6422    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6992 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        6 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.343    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.6422    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.1775    *0.2089    *0.3529E-01* 5.918    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.5178    *0.8731    *0.1686    * 5.178    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 5.918    * 8.000    *0.7398    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7018 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        7 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.463    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.7398    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2000    *0.2417    *0.3627E-01* 6.666    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.5833    * 1.092    *0.1873    * 5.833    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 6.666    * 8.000    *0.8332    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7044 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        8 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.601    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.8332    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2212    *0.2747    *0.3725E-01* 7.375    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.6453    * 1.350    *0.2092    * 6.453    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 7.375    * 8.000    *0.9219    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7070 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=        9 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.763    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=   0.9219    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2412    *0.3074    *0.3824E-01* 8.039    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.7034    * 1.653    *0.2350    * 7.034    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 8.039    * 8.000    * 1.005    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7096 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       10 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.951    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.005    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2596    *0.3394    *0.3922E-01* 8.652    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.7570    * 2.009    *0.2653    * 7.570    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 8.652    * 8.000    * 1.081    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7122 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       11 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    2.171    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.081    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2762    *0.3699    *0.4018E-01* 9.206    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.8056    * 2.424    *0.3009    * 8.056    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 9.206    * 8.000    * 1.151    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7148 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       12 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    2.428    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.151    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2909    *0.3985    *0.4110E-01* 9.697    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.8485    * 2.905    *0.3424    * 8.485    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 9.697    * 8.000    * 1.212    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7174 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       13 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    2.725    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.212    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3035    *0.4245    *0.4196E-01* 10.12    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.8854    * 3.457    *0.3905    * 8.854    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 10.12    * 8.000    * 1.265    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7200 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       14 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    3.069    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.265    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3141    *0.4474    *0.4274E-01* 10.47    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9161    * 4.083    *0.4457    * 9.161    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 10.47    * 8.000    * 1.309    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7226 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       15 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    3.462    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.309    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3225    *0.4668    *0.4342E-01* 10.75    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9407    * 4.782    *0.5083    * 9.407    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 10.75    * 8.000    * 1.344    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7252 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       16 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    3.906    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.344    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3290    *0.4827    *0.4401E-01* 10.97    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9597    * 5.549    *0.5782    * 9.597    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 10.97    * 8.000    * 1.371    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7278 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       17 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    4.399    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.371    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3338    *0.4950    *0.4448E-01* 11.13    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9737    * 6.377    *0.6549    * 9.737    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.13    * 8.000    * 1.391    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7304 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       18 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    4.940    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.391    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3372    *0.5041    *0.4485E-01* 11.24    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9835    * 7.255    *0.7377    * 9.835    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.24    * 8.000    * 1.405    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7330 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       19 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    5.523    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.405    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3395    *0.5106    *0.4512E-01* 11.32    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9901    * 8.174    *0.8255    * 9.901    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.32    * 8.000    * 1.414    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7356 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       20 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    6.140    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.414    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3409    *0.5150    *0.4532E-01* 11.36    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9943    * 9.122    *0.9174    * 9.943    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.36    * 8.000    * 1.420    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7382 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       21 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    6.784    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.420    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3418    *0.5178    *0.4545E-01* 11.39    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9968    * 10.09    * 1.012    * 9.968    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.39    * 8.000    * 1.424    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7408 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       22 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    7.449    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.424    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3423    *0.5195    *0.4553E-01* 11.41    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9983    * 11.07    * 1.109    * 9.983    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.41    * 8.000    * 1.426    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7434 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       23 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    8.127    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.426    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3426    *0.5205    *0.4559E-01* 11.42    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9991    * 12.06    * 1.207    * 9.991    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.42    * 8.000    * 1.427    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7460 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       24 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    8.814    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.427    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3427    *0.5211    *0.4562E-01* 11.42    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9996    * 13.06    * 1.306    * 9.996    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.42    * 8.000    * 1.428    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7486 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       25 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    9.507    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.428    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3428    *0.5214    *0.4563E-01* 11.43    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9998    * 14.05    * 1.406    * 9.998    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.43    * 8.000    * 1.428    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7512 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       26 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    10.20    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.428    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3428    *0.5216    *0.4564E-01* 11.43    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.9999    * 15.05    * 1.505    * 9.999    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.43    * 8.000    * 1.428    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7538 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       27 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    10.90    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.428    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3428    *0.5217    *0.4565E-01* 11.43    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    * 1.000    * 16.05    * 1.605    *10.000    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.43    * 8.000    * 1.429    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7564 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       28 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    11.60    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.429    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3429    *0.5217    *0.4565E-01* 11.43    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    * 1.000    * 17.05    * 1.705    *10.000    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.43    * 8.000    * 1.429    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7590 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       29 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    12.30    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.429    
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.3429    *0.5217    *0.4565E-01* 11.43    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    * 1.000    * 18.05    * 1.805    *10.000    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 11.43    * 8.000    * 1.429    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       7616 WORDS OF 4 BYTES
+               (  0.15  % OF TOTAL MEMORY)
+ APARTADO D
+ NUMERO DE USUARIOS=       30 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    13.00    
+ PRODUCTIVIDAD DEL SISTEMA (X0)=    1.429    
+     27 /END/

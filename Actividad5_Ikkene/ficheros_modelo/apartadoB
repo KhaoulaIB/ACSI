@@ -1,0 +1,53 @@
+ 
+  SIMULOG   ***  QNAP2  ***  ( 28-02-1999  ) V 9.4   
+  (C)  COPYRIGHT BY CII HONEYWELL BULL AND INRIA, 1986
+ 
+ 
+      1 /DECLARE/ QUEUE CPU,DISC,TERMINAL;
+      2           REAL PROB1=7.;
+      3           REAL R;
+      4           INTEGER N1;
+      5 /STATION/ NAME=CPU;
+      6 &         SCHED=PS;
+      7           SERVICE=EXP(0.03);
+      8           TRANSIT=DISC,PROB1,TERMINAL,1;
+      9 /STATION/ NAME=DISC;
+     10 		SERVICE= EXP(0.1);
+     11           TRANSIT=CPU;
+     12 /STATION/ NAME=TERMINAL;
+     13           TYPE=INFINITE;
+     14           INIT=N1;
+     15           SERVICE=EXP(8.);
+     16           TRANSIT=CPU;
+     17 /CONTROL/ CLASS=ALL QUEUE;
+     18 /EXEC/    FOR N1:=10 STEP 10 UNTIL 10 DO
+     19           BEGIN
+     20             SOLVE;
+     21 			PRINT("NUMERO DE USUARIOS=",N1);
+     22 			R:= (N1/MTHRUPUT(TERMINAL))-MSERVICE(TERMINAL);
+     23 			PRINT("TIEMPO DE RESPUESTA DEL SISTEMA (R)= ", R);
+     24 			PRINT("TIEMPO TOTAL (R+Z) = ", R+MSERVICE(TERMINAL));
+     25 			PRINT("NÚMERO DE USUARIOS TRBAJANDO = ", N1-MCUSTNB(TERMINAL));
+     26 			PRINT("TIEMPO DE USUARIOS REFLEXIONANDO= ", MCUSTNB(TERMINAL));
+     27 	
+     28           END;
+ - MEAN VALUE ANALYSIS ("MVA") -
+ *******************************************************************
+ *   NAME   *  SERVICE * BUSY PCT *  CUST NB * RESPONSE *  THRUPUT *
+ *******************************************************************
+ *          *          *          *          *          *          *
+ *CPU       *0.3000E-01*0.2412    *0.3074    *0.3824E-01* 8.039    *
+ *          *          *          *          *          *          *
+ *DISC      *0.1000    *0.7034    * 1.653    *0.2350    * 7.034    *
+ *          *          *          *          *          *          *
+ *TERMINAL  * 8.000    *0.0000E+00* 8.039    * 8.000    * 1.005    *
+ *          *          *          *          *          *          *
+ *******************************************************************
+              MEMORY USED:       6858 WORDS OF 4 BYTES
+               (  0.14  % OF TOTAL MEMORY)
+ NUMERO DE USUARIOS=       10 
+ TIEMPO DE RESPUESTA DEL SISTEMA (R)=    1.951    
+ TIEMPO TOTAL (R+Z) =    9.951    
+ NÚMERO DE USUARIOS TRBAJANDO =    1.961    
+ TIEMPO DE USUARIOS REFLEXIONANDO=    8.039    
+     29 /END/
