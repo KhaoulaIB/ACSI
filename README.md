@@ -1,2 +1,2 @@
 # ACSI
-Avaluació del Comportament de Sistemes Informàtics.
+Pràctiques i activitats de l'assignatura Avaluació del Comportament de Sistemes Informàtics.
